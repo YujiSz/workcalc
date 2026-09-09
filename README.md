@@ -51,7 +51,7 @@ workcalc/
     ├── how-to-price-a-freelance-project.html
     ├── profit-margin-explained.html
     └── break-even-point-explained.html
-
+```
     Manual Test Cases & Edge Cases
 Below is the verified test battery used to validate the calculation logic.
 1. Hourly Rate Calculator
