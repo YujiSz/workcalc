@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Margin & Markup Calculator — WorkCalc</title>
+    <meta name="description"
+        content="Calculate gross margin, net profit margin, and cost markup percentage for your service business or freelance operations instantly.">
+    <link rel="canonical" href="./profit-margin-calculator.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Profit Margin & Markup Calculator | WorkCalc">
+    <meta property="og:description"
+        content="Instant calculation of gross profit, net profit, gross margin, and markup percentage.">
+    <meta property="og:url" content="./profit-margin-calculator.html">
+    <meta property="og:image" content="../assets/favicon.svg">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/favicon.svg" alt="WorkCalc logo" class="brand-logo" width="32" height="32">
+                <span>WorkCalc</span>
+            </a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="./hourly-rate-calculator.html" class="nav-link">Hourly Rate</a></li>
+                    <li><a href="./project-pricing-calculator.html" class="nav-link">Project Pricing</a></li>
+                    <li><a href="./profit-margin-calculator.html" class="nav-link active">Profit Margin</a></li>
+                    <li><a href="./break-even-calculator.html" class="nav-link">Break-even</a></li>
+                    <li><a href="./commission-calculator.html" class="nav-link">Commission</a></li>
+                    <li><a href="../guides/profit-margin-explained.html" class="nav-link">Guides</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="page-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="../index.html#calculators">Calculators</a>
+                <span>/</span>
+                <span aria-current="page">Profit Margin Calculator</span>
+            </nav>
+            <h1 class="page-title">Profit Margin & Markup Calculator</h1>
+            <p class="page-description">Accurately calculate your gross profit, net profit, margin percentages, and
+                required markup to maintain a healthy service business.</p>
+        </div>
+
+        <div class="calc-workspace">
+            <section class="calc-card" aria-labelledby="form-heading">
+                <h2 id="form-heading" class="calc-title">Revenue & Expense Figures</h2>
+                <div id="calc-alert" class="calc-alert calc-alert-warning" role="alert"></div>
+
+                <form id="profit-margin-form" novalidate>
+                    <div class="form-group">
+                        <label for="margin-revenue" class="form-label">
+                            <span>Total Revenue</span>
+                            <span class="form-label-hint">Gross billings or sales</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="margin-revenue" class="form-control has-prefix" min="0" step="100"
+                                value="12000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="margin-cogs" class="form-label">
+                            <span>Cost of Goods Sold (COGS)</span>
+                            <span class="form-label-hint">Direct service costs & contractor labor</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="margin-cogs" class="form-control has-prefix" min="0" step="100"
+                                value="4500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="margin-opex" class="form-label">
+                            <span>Operating Expenses (OPEX)</span>
+                            <span class="form-label-hint">Rent, marketing, general admin overhead</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="margin-opex" class="form-control has-prefix" min="0" step="50"
+                                value="2500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary"
+                            onclick="this.form.dispatchEvent(new Event('input'))">Recalculate</button>
+                        <button type="reset" class="btn btn-secondary">Reset Defaults</button>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="results-panel" aria-labelledby="results-heading">
+                <div class="results-header">
+                    <h2 id="results-heading" class="results-title">Profit Analysis</h2>
+                    <button type="button" class="btn btn-secondary btn-sm" data-copy-target="margin-results-container"
+                        aria-label="Copy margin results">
+                        Copy Analysis
+                    </button>
+                    <span class="toast-msg" aria-live="polite">Copied!</span>
+                </div>
+
+                <div id="margin-results-container" aria-live="polite">
+                    <div class="metric-highlight">
+                        <div class="metric-label">Net Profit (Bottom Line)</div>
+                        <div class="metric-value" id="res-net-profit">$0.00</div>
+                        <small style="color: var(--color-text-light); font-size: 0.75rem;">Revenue minus COGS and
+                            Operating Expenses</small>
+                    </div>
+
+                    <div class="metric-list">
+                        <div class="metric-item">
+                            <span class="metric-item-label">Gross Profit:</span>
+                            <span class="metric-item-value" id="res-gross-profit">$0.00</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Gross Margin:</span>
+                            <span class="metric-item-value" id="res-gross-margin">0.0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Net Profit Margin:</span>
+                            <span class="metric-item-value" id="res-net-margin">0.0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Markup on Direct Costs:</span>
+                            <span class="metric-item-value" id="res-markup">0.0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="calc-disclaimer">
+                    Note: Gross margin is calculated relative to revenue, while markup is calculated relative to direct
+                    cost. A 50% markup results in a 33.3% gross margin.
+                </p>
+            </aside>
+        </div>
+
+        <section class="section" style="border-top: 1px solid var(--color-border);">
+            <h2 class="section-title">Confused Between Margin & Markup?</h2>
+            <p style="color: var(--color-text-muted); max-width: 800px; margin-bottom: 1.5rem;">
+                Using markup when you intended to calculate profit margin is one of the most common causes of negative
+                cash flow in service agencies. Review our breakdown of real-world agency benchmarks.
+            </p>
+            <a href="../guides/profit-margin-explained.html" class="btn btn-outline">Read: Margin vs. Markup Deep Dive
+                &rarr;</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 WorkCalc. Client-side financial calculator.</p>
+            <a href="../index.html" style="color: var(--color-text-muted);">Back to Home</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

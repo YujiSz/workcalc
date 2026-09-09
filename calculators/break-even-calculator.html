@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break-Even Point Calculator — WorkCalc</title>
+    <meta name="description"
+        content="Calculate your monthly break-even point in units and sales revenue. Determine contribution margin and margin of safety for your freelance services.">
+    <link rel="canonical" href="./break-even-calculator.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Break-Even Point Calculator | WorkCalc">
+    <meta property="og:description" content="Find the exact sales volume needed to cover fixed overhead expenses.">
+    <meta property="og:url" content="./break-even-calculator.html">
+    <meta property="og:image" content="../assets/favicon.svg">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/favicon.svg" alt="WorkCalc logo" class="brand-logo" width="32" height="32">
+                <span>WorkCalc</span>
+            </a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="./hourly-rate-calculator.html" class="nav-link">Hourly Rate</a></li>
+                    <li><a href="./project-pricing-calculator.html" class="nav-link">Project Pricing</a></li>
+                    <li><a href="./profit-margin-calculator.html" class="nav-link">Profit Margin</a></li>
+                    <li><a href="./break-even-calculator.html" class="nav-link active">Break-even</a></li>
+                    <li><a href="./commission-calculator.html" class="nav-link">Commission</a></li>
+                    <li><a href="../guides/break-even-point-explained.html" class="nav-link">Guides</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="page-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="../index.html#calculators">Calculators</a>
+                <span>/</span>
+                <span aria-current="page">Break-Even Calculator</span>
+            </nav>
+            <h1 class="page-title">Break-Even Point Calculator</h1>
+            <p class="page-description">Determine the minimum volume of service packages, retainers, or billable days
+                needed every month to avoid operating at a loss.</p>
+        </div>
+
+        <div class="calc-workspace">
+            <section class="calc-card" aria-labelledby="form-heading">
+                <h2 id="form-heading" class="calc-title">Cost & Unit Economics</h2>
+                <div id="calc-alert" class="calc-alert calc-alert-warning" role="alert"></div>
+
+                <form id="break-even-form" novalidate>
+                    <div class="form-group">
+                        <label for="be-fixed" class="form-label">
+                            <span>Total Monthly Fixed Costs</span>
+                            <span class="form-label-hint">Rent, subscriptions, base salary</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="be-fixed" class="form-control has-prefix" min="0" step="50"
+                                value="3200" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2">
+                        <div class="form-group">
+                            <label for="be-price" class="form-label">
+                                <span>Selling Price / Unit</span>
+                                <span class="form-label-hint">Package or retainer price</span>
+                            </label>
+                            <div class="input-affix-wrapper">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="be-price" class="form-control has-prefix" min="1" step="25"
+                                    value="800" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="be-variable" class="form-label">
+                                <span>Variable Cost / Unit</span>
+                                <span class="form-label-hint">Direct costs per delivery</span>
+                            </label>
+                            <div class="input-affix-wrapper">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="be-variable" class="form-control has-prefix" min="0" step="10"
+                                    value="150" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="be-actual-units" class="form-label">
+                            <span>Actual Units Sold / Month (Optional)</span>
+                            <span class="form-label-hint">To calculate margin of safety buffer</span>
+                        </label>
+                        <input type="number" id="be-actual-units" class="form-control" min="0" step="1" value="7">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary"
+                            onclick="this.form.dispatchEvent(new Event('input'))">Recalculate</button>
+                        <button type="reset" class="btn btn-secondary">Reset Defaults</button>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="results-panel" aria-labelledby="results-heading">
+                <div class="results-header">
+                    <h2 id="results-heading" class="results-title">Break-Even Results</h2>
+                    <button type="button" class="btn btn-secondary btn-sm" data-copy-target="be-results-container"
+                        aria-label="Copy break-even results">
+                        Copy Results
+                    </button>
+                    <span class="toast-msg" aria-live="polite">Copied!</span>
+                </div>
+
+                <div id="be-results-container" aria-live="polite">
+                    <div class="metric-highlight">
+                        <div class="metric-label">Break-Even Volume</div>
+                        <div class="metric-value" id="res-be-units">0 units</div>
+                        <small style="color: var(--color-text-light); font-size: 0.75rem;">Minimum sales required to
+                            achieve zero net loss</small>
+                    </div>
+
+                    <div class="metric-list">
+                        <div class="metric-item">
+                            <span class="metric-item-label">Break-Even Revenue:</span>
+                            <span class="metric-item-value" id="res-be-revenue">$0.00</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Unit Contribution Margin:</span>
+                            <span class="metric-item-value" id="res-contribution-margin">$0.00</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Contribution Margin Ratio:</span>
+                            <span class="metric-item-value" id="res-contribution-ratio">0.0%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Margin of Safety:</span>
+                            <span class="metric-item-value" id="res-margin-safety">Enter units sold</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="calc-disclaimer">
+                    Insight: Once sales cross the break-even threshold, 100% of the unit contribution margin flows
+                    directly into net operating profits.
+                </p>
+            </aside>
+        </div>
+
+        <section class="section" style="border-top: 1px solid var(--color-border);">
+            <h2 class="section-title">Applying Break-Even to Consulting</h2>
+            <p style="color: var(--color-text-muted); max-width: 800px; margin-bottom: 1.5rem;">
+                Service businesses often overlook how small recurring subscription overheads inflate the required number
+                of monthly billing days. Learn how to optimize fixed commitments.
+            </p>
+            <a href="../guides/break-even-point-explained.html" class="btn btn-outline">Read: Practical Break-Even
+                Analysis Guide &rarr;</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 WorkCalc. Client-side financial calculator.</p>
+            <a href="../index.html" style="color: var(--color-text-muted);">Back to Home</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

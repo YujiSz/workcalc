@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yujisz.github.io/workcalc/sitemap.xml

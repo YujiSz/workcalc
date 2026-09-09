@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Hourly Rate Calculator — WorkCalc</title>
+    <meta name="description"
+        content="Calculate your true required freelance hourly rate based on desired income, unbillable hours, monthly overhead, vacation time, and taxes. Free online tool.">
+    <link rel="canonical" href="./hourly-rate-calculator.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Freelance Hourly Rate Calculator | WorkCalc">
+    <meta property="og:description"
+        content="Find out what you really need to charge per hour to hit your net monthly take-home target.">
+    <meta property="og:url" content="./hourly-rate-calculator.html">
+    <meta property="og:image" content="../assets/favicon.svg">
+
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container nav-bar">
+            <a href="../index.html" class="brand-link">
+                <img src="../assets/favicon.svg" alt="WorkCalc logo" class="brand-logo" width="32" height="32">
+                <span>WorkCalc</span>
+            </a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="./hourly-rate-calculator.html" class="nav-link active">Hourly Rate</a></li>
+                    <li><a href="./project-pricing-calculator.html" class="nav-link">Project Pricing</a></li>
+                    <li><a href="./profit-margin-calculator.html" class="nav-link">Profit Margin</a></li>
+                    <li><a href="./break-even-calculator.html" class="nav-link">Break-even</a></li>
+                    <li><a href="./commission-calculator.html" class="nav-link">Commission</a></li>
+                    <li><a href="../guides/how-to-calculate-hourly-rate.html" class="nav-link">Guides</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="container">
+        <div class="page-header">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="../index.html#calculators">Calculators</a>
+                <span>/</span>
+                <span aria-current="page">Hourly Rate Calculator</span>
+            </nav>
+            <h1 class="page-title">Freelance Hourly Rate Calculator</h1>
+            <p class="page-description">Calculate a sustainable hourly fee that covers business expenses, taxes,
+                vacation time, and unpaid administrative hours.</p>
+        </div>
+
+        <div class="calc-workspace">
+            <!-- Input Card -->
+            <section class="calc-card" aria-labelledby="form-heading">
+                <h2 id="form-heading" class="calc-title">Your Income & Schedule Parameters</h2>
+                <div id="calc-alert" class="calc-alert calc-alert-warning" role="alert"></div>
+
+                <form id="hourly-calc-form" novalidate>
+                    <div class="form-group">
+                        <label for="monthly-income" class="form-label">
+                            <span>Desired Monthly Net Take-Home</span>
+                            <span class="form-label-hint">What you want in your personal account</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="monthly-income" class="form-control has-prefix" min="0" step="100"
+                                value="5000" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2">
+                        <div class="form-group">
+                            <label for="weekly-hours" class="form-label">Total Work Hours / Week</label>
+                            <input type="number" id="weekly-hours" class="form-control" min="1" max="100" step="1"
+                                value="40" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vacation-weeks" class="form-label">Vacation / Sick Weeks / Year</label>
+                            <input type="number" id="vacation-weeks" class="form-control" min="0" max="51" step="1"
+                                value="4" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthly-expenses" class="form-label">
+                            <span>Monthly Business Expenses</span>
+                            <span class="form-label-hint">Software, coworking, accountant, gear</span>
+                        </label>
+                        <div class="input-affix-wrapper">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="monthly-expenses" class="form-control has-prefix" min="0" step="50"
+                                value="600" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2">
+                        <div class="form-group">
+                            <label for="tax-reserve" class="form-label">
+                                <span>Tax & Reserve Buffer</span>
+                                <span class="form-label-hint">% of gross</span>
+                            </label>
+                            <div class="input-affix-wrapper">
+                                <input type="number" id="tax-reserve" class="form-control has-suffix" min="0" max="95"
+                                    step="1" value="25" required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="billable-ratio" class="form-label">
+                                <span>Billable Hours Ratio</span>
+                                <span class="form-label-hint">Typically 50%–70%</span>
+                            </label>
+                            <div class="input-affix-wrapper">
+                                <input type="number" id="billable-ratio" class="form-control has-suffix" min="5"
+                                    max="100" step="5" value="60" required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary"
+                            onclick="this.form.dispatchEvent(new Event('input'))">Recalculate</button>
+                        <button type="reset" class="btn btn-secondary">Reset Defaults</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Results Side Panel -->
+            <aside class="results-panel" aria-labelledby="results-heading">
+                <div class="results-header">
+                    <h2 id="results-heading" class="results-title">Calculated Rates</h2>
+                    <button type="button" class="btn btn-secondary btn-sm" data-copy-target="results-data-container"
+                        aria-label="Copy calculated results">
+                        Copy Results
+                    </button>
+                    <span class="toast-msg" aria-live="polite">Copied!</span>
+                </div>
+
+                <div id="results-data-container" aria-live="polite">
+                    <div class="metric-highlight">
+                        <div class="metric-label">Recommended Hourly Rate</div>
+                        <div class="metric-value" id="res-recommended-rate">$0.00 / hr</div>
+                        <small style="color: var(--color-text-light); font-size: 0.75rem;">Accounts for non-billable
+                            time & buffers</small>
+                    </div>
+
+                    <div class="metric-list">
+                        <div class="metric-item">
+                            <span class="metric-item-label">Minimum Baseline Rate:</span>
+                            <span class="metric-item-value" id="res-min-rate">$0.00 / hr</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Required Monthly Gross:</span>
+                            <span class="metric-item-value" id="res-gross-monthly">$0.00</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Required Annual Gross:</span>
+                            <span class="metric-item-value" id="res-gross-annual">$0.00</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Effective Yield (all hrs):</span>
+                            <span class="metric-item-value" id="res-effective-yield">$0.00 / hr</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-item-label">Annual Billable Hours:</span>
+                            <span class="metric-item-value" id="res-billable-hours">0 hrs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="calc-disclaimer">
+                    Notice: Figures are estimates based on self-reported targets. Tax rates vary by jurisdiction and
+                    business entity. Consult a certified accountant for tax compliance.
+                </p>
+            </aside>
+        </div>
+
+        <!-- Related Guide Section -->
+        <section class="section" style="border-top: 1px solid var(--color-border);">
+            <h2 class="section-title">How This Formula Works</h2>
+            <p style="color: var(--color-text-muted); max-width: 800px; margin-bottom: 1.5rem;">
+                Most early-stage freelancers make the mistake of dividing their net income goal by 2,000 yearly hours.
+                In reality, freelance work involves non-billable client acquisition, accounting, invoicing, hardware
+                upgrades, and unpaid vacation. Read our detailed guide to set competitive rates without burning out.
+            </p>
+            <a href="../guides/how-to-calculate-hourly-rate.html" class="btn btn-outline">Read: How to Calculate Your
+                Freelance Hourly Rate &rarr;</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 WorkCalc. For informational purposes only.</p>
+            <a href="../index.html" style="color: var(--color-text-muted);">Back to Home</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
